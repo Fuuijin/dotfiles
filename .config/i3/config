@@ -62,7 +62,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # mod tab
-bindsym $mod+Tab exec --no-startup-id "rofi -show"
+bindsym Mod1+Tab exec --no-startup-id "rofi -show"
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec "rofi -modi drun,run -show drun"
