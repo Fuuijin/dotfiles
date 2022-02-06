@@ -14,7 +14,7 @@ window:
 font:
   normal:
     family: FuraCode Nerd Font
-  size: 8
+  size: 11
 colors:
   primary:
     background: '#2E3440'
