@@ -169,6 +169,7 @@ linters.setup {
 --     },
 -- }
 lvim.plugins = {
+  {"github/copilot.vim"},
   {"lunarvim/colorschemes"},
   {"folke/tokyonight.nvim"},
   {"shaunsingh/nord.nvim"},
