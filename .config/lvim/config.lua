@@ -169,7 +169,6 @@ linters.setup {
 --     },
 -- }
 lvim.plugins = {
-  {"github/copilot.vim"},
   {"lunarvim/colorschemes"},
   {"folke/tokyonight.nvim"},
   {"shaunsingh/nord.nvim"},
@@ -177,12 +176,6 @@ lvim.plugins = {
   {
     "simrat39/symbols-outline.nvim",
     cmd = "SymbolsOutline",
-  },
-  {
-    "tzachar/cmp-tabnine",
-    run = "./install.sh",
-    requires = "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
   },
   {
   "phaazon/hop.nvim",
