@@ -16,8 +16,29 @@ bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
-bspc rule -a Gimp desktop='^8' state=floating follow=on
-bspc rule -a Google-chrome desktop='^2' follow=on
-bspc rule -a mplayer2 state=floating
+bspc rule -a Google-chrome desktop='^2' 
+bspc rule -a Slack desktop='^10' 
+bspc rule -a discord desktop='^9' 
+bspc rule -a Caprine desktop='^8' 
+bspc rule -a obsidian desktop='^3' 
+bspc rule -a Steam desktop='^7' 
+bspc rule -a notion-app desktop='^4' 
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
+
+killall google-chrome-stable
+killall slack
+killall discord
+killall caprine
+killall obsidian
+killall steam
+killall notion-app
+
+google-chrome-stable &
+slack &
+discord &
+caprine &
+obsidian &
+steam-native &
+notion-app &
+

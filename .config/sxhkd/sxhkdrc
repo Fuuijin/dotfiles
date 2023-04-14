@@ -14,6 +14,14 @@ alt + d
 shift + alt + {q,r}
   bspc {quit,wm -r}
 
+# restart polybar
+shift + alt + p
+  pkill -USR1 polybar
+
+# brightness
+super + {_,shift + }{F11,F12}
+    xbacklight -{inc,dec} 10
+
 # move focused window to the next workspace and then switch to that workspace
 super + shift + {h,l}
     id=$(bspc query --nodes --node); bspc node --to-desktop {prev,next}; bspc desktop --focus next; bspc node --focus ${id}
@@ -37,3 +45,20 @@ alt + shift + {h,j,k,l}
 # Alt + Tab to switch between windows
 alt + Tab
   bspc node -f last.!hidden.window
+
+# Rofi alt tab
+super + Tab
+  rofi -show combi -combi-modi "window" -modi combi
+
+# Kill window
+super + {_,shift + }q
+    bspc node -{c,k}
+
+# Toggle floating
+super + d
+    if [ -z "$(bspc query -N -n focused.floating)" ]; then \
+        bspc node focused -t floating; \
+    else \
+        bspc node focused -t tiled; \
+    fi
+

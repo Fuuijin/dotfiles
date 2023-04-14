@@ -20,8 +20,8 @@ lvim.colorscheme = "lunar"
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
--- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
--- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
+lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
+lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 -- unmap a default keymapping
 -- vim.keymap.del("n", "<C-Up>")
 -- override a default keymapping
@@ -158,7 +158,7 @@ pcall(function()
             enable = true,
           },
           checkOnSave = {
-            enable = true,
+            enable = false,
             command = "clippy",
           },
         },
@@ -354,18 +354,6 @@ lvim.plugins = {
     end,
   },
   {
-    "oberblastmeister/neuron.nvim",
-    config = function()
-      require("neuron").setup {
-        virtual_titles = true,
-        mappings = true,
-        run = nil, -- function to run when in neuron dir
-        neuron_dir = "~/neuron", -- the directory of all of your notes, expanded by default (currently supports only one directory for notes, find a way to detect neuron.dhall to use any directory)
-        leader = "gz", -- the leader key to for all mappings, remember with 'go zettel'
-      }
-    end,
-  },
-  {
     "ethanholz/nvim-lastplace",
     event = "BufRead",
     config = function()
@@ -419,6 +407,19 @@ lvim.plugins = {
     event = "BufRead",
   },
   {
+    "preservim/vim-markdown",
+    "godlygeek/tabular",
+    "epwalsh/obsidian.nvim",
+    config = function()
+      require("obsidian").setup {
+        dir = "~/Repos/SecondBrain",
+        completion = {
+          nvim_cmp = true,
+        },
+      }
+    end,
+  },
+  {
     "norcalli/nvim-colorizer.lua",
     config = function()
       require("colorizer").setup({ "css", "scss", "html", "javascript" }, {
@@ -432,7 +433,28 @@ lvim.plugins = {
       })
     end,
   },
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "VimEnter",
+    config = function()
+      require("copilot").setup {
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      }
+    end,
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    after = { "copilot.lua" },
+    config = function()
+      require("copilot_cmp").setup()
+    end,
+  },
 }
+
+lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
+table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" })
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- vim.api.nvim_create_autocmd("BufEnter", {
