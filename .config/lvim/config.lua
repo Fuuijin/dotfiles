@@ -158,7 +158,7 @@ pcall(function()
             enable = true,
           },
           checkOnSave = {
-            enable = false,
+            enable = true,
             command = "clippy",
           },
         },
@@ -309,6 +309,9 @@ lvim.plugins = {
   },
   {
     "arcticicestudio/nord-vim",
+  },
+  {
+    "tanvirtin/monokai.nvim",
   },
   {
     "simrat39/rust-tools.nvim",
