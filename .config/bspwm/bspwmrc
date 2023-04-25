@@ -26,19 +26,3 @@ bspc rule -a notion-app desktop='^4'
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 
-killall google-chrome-stable
-killall slack
-killall discord
-killall caprine
-killall obsidian
-killall steam
-killall notion-app
-
-google-chrome-stable &
-slack &
-discord &
-caprine &
-obsidian &
-steam-native &
-notion-app &
-

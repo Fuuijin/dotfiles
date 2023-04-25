@@ -1,15 +1,17 @@
 # To spawn the terminal
-super + Return
-  kitty
-
+super + {_,shift +}Return
+  {kitty, bspc rule -a \* -o state=floating && kitty}
 # make sxhkd reload its configuration files:
 alt + Escape
   pkill -USR1 -x sxhkd
 
 # for dmenu
 alt + d
-  rofi -show combi -combi-modi "window,run,ssh" -modi combi
+  rofi -show combi -combi-modi "window,run,drun" -modi combi
 
+# rofi power menu
+super + p
+  rofi -show p -modi p:$HOME/.local/bin/rofi-power-menu
 # quit/restart bspwm
 shift + alt + {q,r}
   bspc {quit,wm -r}

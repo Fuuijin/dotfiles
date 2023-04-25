@@ -13,6 +13,7 @@ lvim.log.level = "warn"
 lvim.format_on_save.enabled = true
 
 lvim.colorscheme = "lunar"
+-- lvim.transparent_window = true
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -92,7 +93,7 @@ vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyz
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { command = "stylua", filetypes = { "lua" } },
-  { command = "black", filetypes = { "python" } },
+  { command = "black",  filetypes = { "python" } },
 }
 
 --RUST
@@ -150,7 +151,6 @@ pcall(function()
         local rt = require "rust-tools"
         vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
       end,
-
       capabilities = require("lvim.lsp").common_capabilities(),
       settings = {
         ["rust-analyzer"] = {
@@ -206,106 +206,15 @@ lvim.builtin.which_key.mappings["R"] = {
   D = { "<cmd>lua require'crates'.show_dependencies_popup()<cr>", "[crates] show dependencies" },
 }
 
---python
--- TODO: debugpy installed by default
--- Setup dap for python
-lvim.builtin.dap.active = true
-pcall(function()
-  require("dap-python").setup(mason_path .. "packages/debugpy/venv/bin/python")
-end)
-
--- Supported test frameworks are unittest, pytest and django. By default it
--- tries to detect the runner by probing for pytest.ini and manage.py, if
--- neither are present it defaults to unittest.
-pcall(function()
-  require("dap-python").test_runner = "pytest"
-end)
-
--- Magma Setup
-
--- Image options. Other options:
--- 1. none:     Don't show images.
--- 2. ueberzug: use Ueberzug to display images.
--- 3. kitty:    use the Kitty protocol to display images.
-vim.g.magma_image_provider = "kitty"
-
--- If this is set to true, then whenever you have an active cell its output
--- window will be automatically shown.
-vim.g.magma_automatically_open_output = true
-
--- If this is true, then text output in the output window will be wrapped.
-vim.g.magma_wrap_output = false
-
--- If this is true, then the output window will have rounded borders.
-vim.g.magma_output_window_borders = false
-
--- The highlight group to be used for highlighting cells.
-vim.g.magma_cell_highlight_group = "CursorLine"
-
--- Where to save/load with :MagmaSave and :MagmaLoad.
--- The generated file is placed in this directory, with the filename itself
--- being the buffer's name, with % replaced by %% and / replaced by %, and
--- postfixed with the extension .json.
-vim.g.magma_save_path = vim.fn.stdpath "data" .. "/magma"
-
--- Mappings
-lvim.builtin.which_key.mappings["dm"] = { "<cmd>lua require('dap-python').test_method()<cr>", "Test Method" }
-lvim.builtin.which_key.mappings["df"] = { "<cmd>lua require('dap-python').test_class()<cr>", "Test Class" }
-lvim.builtin.which_key.vmappings["d"] = {
-  name = "Debug",
-  s = { "<cmd>lua require('dap-python').debug_selection()<cr>", "Debug Selection" },
-}
-
-lvim.builtin.which_key.mappings["j"] = {
-  name = "Jupyter",
-  i = { "<Cmd>MagmaInit<CR>", "Init Magma" },
-  d = { "<Cmd>MagmaDeinit<CR>", "Deinit Magma" },
-  e = { "<Cmd>MagmaEvaluateLine<CR>", "Evaluate Line" },
-  r = { "<Cmd>MagmaReevaluateCell<CR>", "Re evaluate cell" },
-  D = { "<Cmd>MagmaDelete<CR>", "Delete cell" },
-  s = { "<Cmd>MagmaShowOutput<CR>", "Show Output" },
-  R = { "<Cmd>MagmaRestart!<CR>", "Restart Magma" },
-  S = { "<Cmd>MagmaSave<CR>", "Save" },
-}
-
-lvim.builtin.which_key.vmappings["j"] = {
-  name = "Jupyter",
-  e = { "<esc><cmd>MagmaEvaluateVisual<cr>", "Evaluate Highlighted Line" },
-}
-
-lvim.builtin.which_key.mappings["P"] = {
-  name = "Python",
-  i = { "<cmd>lua require('swenv.api').pick_venv()<cr>", "Pick Env" },
-  d = { "<cmd>lua require('swenv.api').get_current_venv()<cr>", "Show Env" },
-}
-
 -- Additional Plugins
 ---
 lvim.plugins = {
-  "AckslD/swenv.nvim",
-  "mfussenegger/nvim-dap-python",
-  {
-    -- You can generate docstrings automatically.
-    "danymat/neogen",
-    config = function()
-      require("neogen").setup {
-        enabled = true,
-        languages = {
-          python = {
-            template = {
-              annotation_convention = "numpydoc",
-            },
-          },
-        },
-      }
-    end,
-  },
-  -- You can run blocks of code like jupyter notebook.
-  { "dccsillag/magma-nvim", run = ":UpdateRemotePlugins" },
-
   {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
+  },
+  {
+    'elkowar/yuck.vim'
   },
   {
     "arcticicestudio/nord-vim",
@@ -342,12 +251,12 @@ lvim.plugins = {
     "rmagatti/goto-preview",
     config = function()
       require("goto-preview").setup {
-        width = 120, -- Width of the floating window
-        height = 25, -- Height of the floating window
+        width = 120,              -- Width of the floating window
+        height = 25,              -- Height of the floating window
         default_mappings = false, -- Bind default mappings
-        debug = false, -- Print debug information
-        opacity = nil, -- 0-100 opacity level of the floating window where 100 is fully transparent.
-        post_open_hook = nil, -- A function taking two arguments, a buffer and a window to be ran as a hook.
+        debug = false,            -- Print debug information
+        opacity = nil,            -- 0-100 opacity level of the floating window where 100 is fully transparent.
+        post_open_hook = nil,     -- A function taking two arguments, a buffer and a window to be ran as a hook.
         -- You can use "default_mappings = true" setup option
         -- Or explicitly set keybindings
         vim.cmd "nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>",
@@ -415,7 +324,7 @@ lvim.plugins = {
     "epwalsh/obsidian.nvim",
     config = function()
       require("obsidian").setup {
-        dir = "~/Repos/SecondBrain",
+        dir = "~/repos/second-brain",
         completion = {
           nvim_cmp = true,
         },
@@ -426,13 +335,13 @@ lvim.plugins = {
     "norcalli/nvim-colorizer.lua",
     config = function()
       require("colorizer").setup({ "css", "scss", "html", "javascript" }, {
-        RGB = true, -- #RGB hex codes
-        RRGGBB = true, -- #RRGGBB hex codes
+        RGB = true,      -- #RGB hex codes
+        RRGGBB = true,   -- #RRGGBB hex codes
         RRGGBBAA = true, -- #RRGGBBAA hex codes
-        rgb_fn = true, -- CSS rgb() and rgba() functions
-        hsl_fn = true, -- CSS hsl() and hsla() functions
-        css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-        css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+        rgb_fn = true,   -- CSS rgb() and rgba() functions
+        hsl_fn = true,   -- CSS hsl() and hsla() functions
+        css = true,      -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+        css_fn = true,   -- Enable all CSS *functions*: rgb_fn, hsl_fn
       })
     end,
   },
