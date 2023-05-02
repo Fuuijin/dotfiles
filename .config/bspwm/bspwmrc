@@ -2,6 +2,7 @@
 
 sxhkd &
 nitrogen --set-scaled ~/.local/share/wallpapers/bg_27.jpg
+ntfd &
 picom &
 bash /home/fuuijin/.config/polybar/launch.sh --forest &
 

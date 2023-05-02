@@ -7,7 +7,11 @@ alt + Escape
 
 # for dmenu
 alt + d
-  rofi -show combi -combi-modi "window,run,drun" -modi combi
+  rofi -show combi -combi-modi "drun, file-browser-extended" -modi combi file-browser-extended
+
+alt + shift + d
+  rofi -modi file-browser-extended -show file-browser-extended
+
 
 # rofi power menu
 super + p
