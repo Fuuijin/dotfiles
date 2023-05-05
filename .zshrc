@@ -70,7 +70,7 @@ ZSH_THEME="arrow"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf rust nvm)
+plugins=(git fzf rust nvm zsh-autosuggestions)
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
