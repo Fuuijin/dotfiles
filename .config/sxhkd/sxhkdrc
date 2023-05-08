@@ -5,6 +5,10 @@ super + {_,shift +}Return
 alt + Escape
   pkill -USR1 -x sxhkd
 
+# reload zshrc
+super + Escape
+  source $HOME/.zshrc
+
 # for dmenu
 alt + d
   rofi -show combi -combi-modi "drun, file-browser-extended" -modi combi file-browser-extended
